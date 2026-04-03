@@ -1,4 +1,3 @@
-[scribe-README.md](https://github.com/user-attachments/files/26472862/scribe-README.md)
 # Scribe
 
 ## What It Does
@@ -11,6 +10,6 @@ Generates 30-day Health and Wellness participation updates ready to paste direct
 - Free-text monthly overview and optional notable changes field
 - One-click copy to clipboard
 - Works in any browser, no login or setup required
-- EMR-agnostic — output pastes into any system
+- EMR-agnostic - output pastes into any system
 
 #
