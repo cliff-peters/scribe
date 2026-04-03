@@ -16,14 +16,15 @@
 body{min-height:100vh;background:var(--bg);font-family:"Mulish",sans-serif;color:var(--text);padding:0 0 80px;}
 
 /* Header */
-.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
-.cp-logo{width:36px;height:36px;background:var(--logo-gradient);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--logo-text);flex-shrink:0;letter-spacing:-0.5px;}
-.hdr-eyebrow{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:2px;}
-.hdr-title{font-size:17px;font-weight:800;line-height:1;}
+.hdr{padding:36px 20px 0;width:100%;max-width:580px;margin:0 auto 28px;}
+.hdr-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.hdr-lockup{display:flex;align-items:center;gap:14px;}
+.cp-logo{width:44px;height:44px;background:var(--logo-gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:var(--logo-text);flex-shrink:0;letter-spacing:0.02em;}
+.hdr-title{font-size:1.9rem;font-weight:800;line-height:1.2;}
 .hdr-title span{color:var(--blue);}
 
 /* Content */
-.content{max-width:580px;margin:0 auto;padding:28px 24px;}
+.content{max-width:580px;margin:0 auto;padding:0 20px;}
 
 /* Cards */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin-bottom:14px;}
@@ -97,17 +98,18 @@ textarea{resize:vertical;min-height:90px;line-height:1.65;}
 .footer-text{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.04em;}
 
 @media(max-width:600px){
-  .hdr{padding:12px 16px;}
-  .content{padding:20px 16px;}
+  .hdr{padding:24px 16px 0;}
+  .content{padding:0 16px;}
+  .hdr-title{font-size:1.5rem;}
 }
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <div class="cp-logo">CP</div>
-  <div>
-    <div class="hdr-eyebrow">The DOR Suite</div>
+  <div class="hdr-eyebrow">The DOR Suite</div>
+  <div class="hdr-lockup">
+    <div class="cp-logo">CP</div>
     <div class="hdr-title">H&amp;W <span>Scribe</span></div>
   </div>
 </div>
