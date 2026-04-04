@@ -3,238 +3,467 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Scribe — The DOR Suite</title>
+<title>EMR Scribe — The DOR Suite</title>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --bg:#0c0f14;--surface:#181d28;--surface2:#1e2430;--border:#333a48;
-  --blue:#5a9de6;--green:#3ecf7a;--amber:#f0a830;--red:#ef4444;
+  --blue:#5a9de6;--green:#3ecf7a;--amber:#f0a830;--red:#ef4444;--teal:#2dd4bf;
   --text:#f0f2f5;--muted:#9ca3b4;
   --logo-gradient:linear-gradient(135deg,#4a90d9,#3ecf7a);--logo-text:#0c0f14;
 }
 body{min-height:100vh;background:var(--bg);font-family:"Mulish",sans-serif;color:var(--text);padding:0 0 80px;}
-
-/* Header */
-.hdr{padding:36px 20px 0;width:100%;max-width:580px;margin:0 auto 28px;}
-.hdr-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
-.hdr-lockup{display:flex;align-items:center;gap:14px;}
-.cp-logo{width:44px;height:44px;background:var(--logo-gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:var(--logo-text);flex-shrink:0;letter-spacing:0.02em;}
-.hdr-title{font-size:1.9rem;font-weight:800;line-height:1.2;}
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+.cp-logo{width:36px;height:36px;background:var(--logo-gradient);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:var(--logo-text);flex-shrink:0;letter-spacing:-0.5px;}
+.hdr-eyebrow{font-size:9px;font-weight:800;letter-spacing:0.14em;color:var(--blue);text-transform:uppercase;margin-bottom:2px;}
+.hdr-title{font-size:18px;font-weight:800;color:var(--text);line-height:1;}
 .hdr-title span{color:var(--blue);}
-
-/* Content */
-.content{max-width:580px;margin:0 auto;padding:0 20px;}
-
-/* Cards */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:20px 22px;margin-bottom:14px;}
+.tab-bar{display:flex;gap:4px;padding:20px 24px 0;border-bottom:1px solid var(--border);background:var(--surface);overflow-x:auto;}
+.tab-btn{padding:10px 18px;font-family:"Mulish",sans-serif;font-size:13px;font-weight:700;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s;}
+.tab-btn:hover{color:var(--text);}
+.tab-btn.active{color:var(--green);border-bottom-color:var(--green);}
+.main{max-width:640px;margin:0 auto;padding:28px 24px 0;}
+.panel{display:none;}
+.panel.active{display:block;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;}
 .card-title{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
-
-/* Fields */
-.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-.field:last-child{margin-bottom:0;}
-label{font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
-input[type=text],textarea{
-  background:var(--surface2);border:1px solid var(--border);border-radius:7px;
-  color:var(--text);font-family:"Mulish",sans-serif;font-size:13px;font-weight:600;
-  padding:10px 12px;outline:none;width:100%;transition:border-color 0.15s;
-}
+label{display:block;font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+input[type=text],textarea,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:"Mulish",sans-serif;font-size:13px;font-weight:600;color:var(--text);outline:none;transition:border-color .15s;}
 input[type=text]::placeholder,textarea::placeholder{color:var(--border);}
-input[type=text]:focus,textarea:focus{border-color:rgba(90,157,230,0.5);}
+input[type=text]:focus,textarea:focus,select:focus{border-color:rgba(90,157,230,0.5);}
 textarea{resize:vertical;min-height:90px;line-height:1.65;}
-
-/* Participation options */
-.part-group{display:flex;gap:8px;flex-wrap:wrap;}
-.part-opt{
-  display:flex;align-items:center;gap:8px;
-  background:var(--surface2);border:1.5px solid var(--border);
-  border-radius:8px;padding:9px 14px;cursor:pointer;
-  transition:all 0.15s;user-select:none;
-}
-.part-opt:hover{border-color:var(--blue);}
-.part-opt.on{border-color:var(--blue);background:rgba(90,157,230,0.08);}
-.dot{width:13px;height:13px;border-radius:50%;border:2px solid var(--border);background:var(--surface);flex-shrink:0;transition:all 0.15s;position:relative;}
-.part-opt.on .dot{border-color:var(--blue);background:var(--blue);}
-.part-opt.on .dot::after{content:"";position:absolute;width:4px;height:4px;background:#fff;border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);}
-.part-lbl{font-size:12px;font-weight:700;color:var(--text);}
-
-/* Generate button */
-.gen-btn{
-  width:100%;padding:14px;
-  background:var(--blue);border:none;border-radius:8px;
-  color:#fff;font-family:"Mulish",sans-serif;
-  font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;
-  cursor:pointer;transition:all 0.15s;margin-bottom:14px;
-}
+select option{background:var(--surface2);}
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+.chip-group{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{padding:7px 14px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);font-family:"Mulish",sans-serif;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;}
+.chip:hover{border-color:var(--blue);color:var(--blue);}
+.chip.selected{background:rgba(90,157,230,0.1);border-color:var(--blue);color:var(--blue);}
+.chip.disc-chip.pt-selected{background:rgba(90,157,230,0.12);border-color:var(--blue);color:var(--blue);}
+.chip.disc-chip.ot-selected{background:rgba(240,168,48,0.12);border-color:var(--amber);color:var(--amber);}
+.chip.disc-chip.st-selected{background:rgba(62,207,122,0.12);border-color:var(--green);color:var(--green);}
+.toggle-row{display:flex;align-items:center;gap:12px;}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
+.toggle input{opacity:0;width:0;height:0;position:absolute;}
+.toggle-track{position:absolute;inset:0;background:var(--border);border-radius:12px;cursor:pointer;transition:background .2s;}
+.toggle input:checked+.toggle-track{background:var(--blue);}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .2s;pointer-events:none;}
+.toggle input:checked~.toggle-thumb{transform:translateX(20px);}
+.toggle-label{font-size:13px;font-weight:700;color:var(--text);cursor:pointer;user-select:none;}
+.gen-btn{width:100%;padding:14px;background:var(--blue);border:none;border-radius:8px;color:#fff;font-family:"Mulish",sans-serif;font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;margin-bottom:14px;}
 .gen-btn:hover{background:#6aade6;transform:translateY(-1px);}
-
-/* Output */
-.out-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:10px;padding:20px 22px;
-  display:none;
-}
-.out-card.show{display:block;animation:fadeUp 0.25s ease;}
+.gen-btn:active{transform:scale(.98);}
+.out-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:none;}
+.out-card.show{display:block;animation:fadeUp .25s ease;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 .out-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);}
 .out-label{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
 .out-tag{font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);background:rgba(62,207,122,0.08);border:1px solid rgba(62,207,122,0.2);padding:4px 10px;border-radius:4px;}
-.out-text{
-  background:var(--surface2);border:1px solid var(--border);border-radius:8px;
-  padding:16px;font-size:13px;font-weight:600;line-height:1.8;
-  color:var(--text);margin-bottom:16px;
-}
-.copy-btn{
-  background:transparent;border:1.5px solid var(--blue);
-  color:var(--blue);font-family:"Mulish",sans-serif;
-  font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;
-  padding:10px 20px;border-radius:6px;cursor:pointer;transition:all 0.15s;
-}
+.out-text{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:13px;font-weight:600;line-height:1.8;color:var(--text);margin-bottom:16px;}
+.copy-btn{background:transparent;border:1.5px solid var(--blue);color:var(--blue);font-family:"Mulish",sans-serif;font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:10px 20px;border-radius:6px;cursor:pointer;transition:all .15s;}
 .copy-btn:hover,.copy-btn.copied{background:var(--blue);color:#fff;}
-
-/* Footer */
-.footer{text-align:center;padding:24px 16px;display:flex;align-items:center;justify-content:center;gap:8px;border-top:1px solid var(--border);margin-top:8px;}
+.footer{margin-top:48px;padding:24px;display:flex;align-items:center;justify-content:center;gap:8px;border-top:1px solid var(--border);}
 .footer-logo{width:18px;height:18px;background:var(--logo-gradient);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;color:var(--logo-text);flex-shrink:0;}
 .footer-text{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.04em;}
-
-@media(max-width:600px){
-  .hdr{padding:24px 16px 0;}
-  .content{padding:0 16px;}
-  .hdr-title{font-size:1.5rem;}
-}
+.reset-btn{width:100%;padding:10px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-family:"Mulish",sans-serif;font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;margin-bottom:16px;}
+.reset-btn:hover{border-color:var(--red);color:var(--red);}
+@media(max-width:600px){.hdr{padding:12px 16px;}.main{padding:20px 16px 0;}}
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <div class="hdr-eyebrow">The DOR Suite</div>
-  <div class="hdr-lockup">
-    <div class="cp-logo">CP</div>
-    <div class="hdr-title">H&amp;W <span>Scribe</span></div>
+  <div class="cp-logo">CP</div>
+  <div>
+    <div class="hdr-eyebrow">The DOR Suite</div>
+    <div class="hdr-title">EMR <span>Scribe</span></div>
   </div>
 </div>
 
-<div class="content">
-
-  <div class="card">
-    <div class="card-title">Resident Information</div>
-    <div class="field">
-      <label>Resident First Name</label>
-      <input type="text" id="resName" placeholder="e.g. Margaret" autocomplete="off"/>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Overall Participation</div>
-    <div class="part-group" id="partGroup">
-      <div class="part-opt" data-val="consistent"><div class="dot"></div><span class="part-lbl">Consistent</span></div>
-      <div class="part-opt" data-val="good"><div class="dot"></div><span class="part-lbl">Good</span></div>
-      <div class="part-opt" data-val="fair"><div class="dot"></div><span class="part-lbl">Fair</span></div>
-      <div class="part-opt" data-val="inconsistent"><div class="dot"></div><span class="part-lbl">Inconsistent</span></div>
-      <div class="part-opt" data-val="declined"><div class="dot"></div><span class="part-lbl">Frequently Declined</span></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Monthly Overview</div>
-    <div class="field">
-      <label>How is the resident doing overall?</label>
-      <textarea id="overview" placeholder="e.g. Tolerating activities well, seems more engaged, energy has improved..."></textarea>
-    </div>
-    <div class="field">
-      <label>Notable changes or concerns <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
-      <textarea id="changes" placeholder="e.g. Reported increased fatigue mid-month, missed two sessions due to illness..."></textarea>
-    </div>
-  </div>
-
-  <button class="gen-btn" id="genBtn">Generate Entry</button>
-
-  <div class="out-card" id="outCard">
-    <div class="out-header">
-      <span class="out-label">30-Day H&amp;W Entry</span>
-      <span class="out-tag">Ready to Paste</span>
-    </div>
-    <div class="out-text" id="outText"></div>
-    <button class="copy-btn" id="copyBtn">Copy to Clipboard</button>
-  </div>
-
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('hw')">H&amp;W 30-Day</button>
+  <button class="tab-btn" onclick="switchTab('eval')">Eval &amp; Frequency</button>
+  <button class="tab-btn" onclick="switchTab('dc')">Discharge</button>
+  <button class="tab-btn" onclick="switchTab('fall')">Post-Fall</button>
 </div>
 
-<div class="footer">
-  <div class="footer-logo">CP</div>
-  <div class="footer-text">Built by Cliff Peters</div>
+<div class="main">
+
+  <!-- H&W 30-DAY -->
+  <div class="panel active" id="panel-hw">
+    <div class="card" style="margin-top:4px;">
+      <div class="card-title">Focus Area(s)</div>
+      <div class="chip-group" id="hw-focus-chips" style="margin-bottom:14px;">
+        <button class="chip" data-focus="strength" onclick="toggleHWFocus(this)">Strength</button>
+        <button class="chip" data-focus="balance" onclick="toggleHWFocus(this)">Balance</button>
+        <button class="chip" data-focus="ambulation" onclick="toggleHWFocus(this)">Ambulation</button>
+        <button class="chip" data-focus="flexibility" onclick="toggleHWFocus(this)">Flexibility</button>
+        <button class="chip" data-focus="coordination" onclick="toggleHWFocus(this)">Coordination</button>
+        <button class="chip" data-focus="endurance" onclick="toggleHWFocus(this)">Endurance</button>
+        <button class="chip" data-focus="range of motion" onclick="toggleHWFocus(this)">Range of Motion</button>
+        <button class="chip" data-focus="posture" onclick="toggleHWFocus(this)">Posture</button>
+        <button class="chip" data-focus="fine motor skills" onclick="toggleHWFocus(this)">Fine Motor Skills</button>
+        <button class="chip" data-focus="social engagement" onclick="toggleHWFocus(this)">Social Engagement</button>
+      </div>
+      <div class="field">
+        <label>Additional focus <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <input type="text" id="hw-focus-other" placeholder="Any other focus areas..."/>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Monthly Overview</div>
+      <div class="chip-group" id="hw-overview-chips" style="margin-bottom:14px;">
+        <button class="chip" data-overview="Resident is engaged and motivated." onclick="toggleHWOverview(this)">Engaged &amp; Motivated</button>
+        <button class="chip" data-overview="Resident continues to make progress." onclick="toggleHWOverview(this)">Making Progress</button>
+        <button class="chip" data-overview="Resident is responding well to programming." onclick="toggleHWOverview(this)">Responding Well</button>
+        <button class="chip" data-overview="Resident remains active and participatory." onclick="toggleHWOverview(this)">Active &amp; Participatory</button>
+        <button class="chip" data-overview="Resident has shown improvement throughout the month." onclick="toggleHWOverview(this)">Showing Improvement</button>
+      </div>
+      <div class="field">
+        <label>Additional detail <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <textarea id="hw-overview" placeholder="Any additional context..."></textarea>
+      </div>
+      <div class="field">
+        <label>Notable changes or concerns <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <div class="chip-group" id="hw-changes-chips" style="margin-bottom:10px;">
+          <button class="chip" data-change="Resident missed sessions due to illness." onclick="toggleHWChange(this)">Missed — Illness</button>
+          <button class="chip" data-change="Resident was recently hospitalized." onclick="toggleHWChange(this)">Recent Hospitalization</button>
+          <button class="chip" data-change="Resident has experienced a change in condition." onclick="toggleHWChange(this)">Change in Condition</button>
+          <button class="chip" data-change="Resident experienced a recent fall." onclick="toggleHWChange(this)">Recent Fall</button>
+        </div>
+        <input type="text" id="hw-changes" placeholder="Additional notes (optional)..."/>
+      </div>
+    </div>
+    <button class="gen-btn" onclick="generateHW()">Generate Entry</button>
+    <button class="reset-btn" onclick="resetTab('hw')">Clear All</button>
+    <div class="out-card" id="hw-out">
+      <div class="out-header"><span class="out-label">30-Day H&amp;W Entry</span><span class="out-tag">Ready to Paste</span></div>
+      <div class="out-text" id="hw-text"></div>
+      <button class="copy-btn" id="hw-copy" onclick="copyOut('hw-text','hw-copy','Copy to Clipboard')">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <!-- EVAL & FREQUENCY -->
+  <div class="panel" id="panel-eval">
+    <div class="card" style="margin-top:4px;">
+      <div class="card-title">Discipline(s)</div>
+      <div class="chip-group" id="eval-discs">
+        <button class="chip disc-chip" data-disc="PT" onclick="toggleDisc(this,'eval')">PT</button>
+        <button class="chip disc-chip" data-disc="OT" onclick="toggleDisc(this,'eval')">OT</button>
+        <button class="chip disc-chip" data-disc="ST" onclick="toggleDisc(this,'eval')">ST</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Focus Area(s)</div>
+      <div class="chip-group" id="eval-focus-chips" style="margin-bottom:14px;">
+        <button class="chip" data-focus="functional mobility" onclick="toggleFocus(this)">Functional Mobility</button>
+        <button class="chip" data-focus="LE strengthening" onclick="toggleFocus(this)">LE Strengthening</button>
+        <button class="chip" data-focus="fall risk reduction" onclick="toggleFocus(this)">Fall Risk Reduction</button>
+        <button class="chip" data-focus="ADL independence" onclick="toggleFocus(this)">ADL Independence</button>
+        <button class="chip" data-focus="balance training" onclick="toggleFocus(this)">Balance Training</button>
+        <button class="chip" data-focus="UE strengthening" onclick="toggleFocus(this)">UE Strengthening</button>
+        <button class="chip" data-focus="cognitive strategies" onclick="toggleFocus(this)">Cognitive Strategies</button>
+        <button class="chip" data-focus="safety awareness" onclick="toggleFocus(this)">Safety Awareness</button>
+        <button class="chip" data-focus="dysphagia management" onclick="toggleFocus(this)">Dysphagia Management</button>
+        <button class="chip" data-focus="pain management" onclick="toggleFocus(this)">Pain Management</button>
+        <button class="chip" data-focus="endurance" onclick="toggleFocus(this)">Endurance</button>
+      </div>
+      <div class="field">
+        <label>Additional focus <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <input type="text" id="eval-focus-other" placeholder="Any other specific focus areas..."/>
+      </div>
+    </div>
+    <button class="gen-btn" onclick="generateEval()">Generate Entry</button>
+    <button class="reset-btn" onclick="resetTab('eval')">Clear All</button>
+    <div class="out-card" id="eval-out">
+      <div class="out-header"><span class="out-label">Eval &amp; Frequency Entry</span><span class="out-tag">Ready to Paste</span></div>
+      <div class="out-text" id="eval-text"></div>
+      <button class="copy-btn" id="eval-copy" onclick="copyOut('eval-text','eval-copy','Copy to Clipboard')">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <!-- DISCHARGE -->
+  <div class="panel" id="panel-dc">
+    <div class="card" style="margin-top:4px;">
+      <div class="card-title">Discipline(s)</div>
+      <div class="chip-group" id="dc-discs">
+        <button class="chip disc-chip" data-disc="PT" onclick="toggleDisc(this,'dc')">PT</button>
+        <button class="chip disc-chip" data-disc="OT" onclick="toggleDisc(this,'dc')">OT</button>
+        <button class="chip disc-chip" data-disc="ST" onclick="toggleDisc(this,'dc')">ST</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Discharge Reason</div>
+      <div class="chip-group" id="dc-reason-chips" style="margin-bottom:14px;">
+        <button class="chip" data-reason="all goals met" onclick="selectReason(this)">All Goals Met</button>
+        <button class="chip" data-reason="maximum functional potential reached" onclick="selectReason(this)">Max Functional Potential</button>
+        <button class="chip" data-reason="visit limits reached" onclick="selectReason(this)">Visit Limits Reached</button>
+        <button class="chip" data-reason="transitioning to home health services" onclick="selectReason(this)">Home Health</button>
+      </div>
+      <div class="field">
+        <label>Other reason <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(overrides picker above)</span></label>
+        <input type="text" id="dc-reason-other" placeholder="e.g. hospitalized, declined services..."/>
+      </div>
+      <div class="toggle-row" id="hh-toggle-row" style="display:none;margin-top:14px;">
+        <label class="toggle" for="dc-hh-reinstate">
+          <input type="checkbox" id="dc-hh-reinstate"/>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label" onclick="document.getElementById('dc-hh-reinstate').click()">Therapy to be reinstated under home health</span>
+      </div>
+    </div>
+    <button class="gen-btn" onclick="generateDC()">Generate Entry</button>
+    <button class="reset-btn" onclick="resetTab('dc')">Clear All</button>
+    <div class="out-card" id="dc-out">
+      <div class="out-header"><span class="out-label">Discharge Entry</span><span class="out-tag">Ready to Paste</span></div>
+      <div class="out-text" id="dc-text"></div>
+      <button class="copy-btn" id="dc-copy" onclick="copyOut('dc-text','dc-copy','Copy to Clipboard')">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <!-- POST-FALL -->
+  <div class="panel" id="panel-fall">
+    <div class="card" style="margin-top:4px;">
+      <div class="card-title">Fall Location</div>
+      <div class="field" style="margin-bottom:0;">
+        <input type="text" id="fall-location" placeholder="e.g. from bed, in bathroom, in hallway..."/>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Therapy Status</div>
+      <div class="toggle-row">
+        <label class="toggle" for="fall-on-therapy">
+          <input type="checkbox" id="fall-on-therapy" checked onchange="toggleTherapyStatus()"/>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label" onclick="document.getElementById('fall-on-therapy').click()">Currently receiving therapy services</span>
+      </div>
+    </div>
+    <div class="card" id="fall-rec-card">
+      <div class="card-title">Safety Recommendation(s)</div>
+      <div class="chip-group" id="fall-rec-chips" style="margin-bottom:14px;">
+        <button class="chip" data-rec="raised toilet seat" onclick="toggleRec(this)">Raised Toilet Seat</button>
+        <button class="chip" data-rec="bed cane" onclick="toggleRec(this)">Bed Cane</button>
+        <button class="chip" data-rec="fall mat" onclick="toggleRec(this)">Fall Mat</button>
+        <button class="chip" data-rec="bed placed at lowest position" onclick="toggleRec(this)">Bed Lowest Position</button>
+        <button class="chip" data-rec="non-slip bath rug" onclick="toggleRec(this)">Non-Slip Bath Rug</button>
+        <button class="chip" data-rec="least restrictive assistive device" onclick="toggleRec(this)">LRAD</button>
+        <button class="chip" data-rec="environmental modifications" onclick="toggleRec(this)">Environmental Modifications</button>
+        <button class="chip" data-rec="shower chair" onclick="toggleRec(this)">Shower Chair</button>
+        <button class="chip" data-rec="non-slip footwear" onclick="toggleRec(this)">Non-Slip Footwear</button>
+        <button class="chip" data-rec="positioning wedge" onclick="toggleRec(this)">Positioning Wedge</button>
+        <button class="chip" data-rec="adjustable height bed" onclick="toggleRec(this)">Adjustable Height Bed</button>
+      </div>
+      <div class="field">
+        <label>Additional recommendation <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <input type="text" id="fall-rec-other" placeholder="Any other safety recommendations..."/>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Additional Details</div>
+      <div class="field">
+        <label>Therapy plan continuation <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
+        <textarea id="fall-plan" placeholder="Shorthand for therapy plan details — leave blank to omit..." style="min-height:64px;"></textarea>
+      </div>
+      <div class="toggle-row">
+        <label class="toggle" for="fall-family">
+          <input type="checkbox" id="fall-family"/>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label" onclick="document.getElementById('fall-family').click()">Family to be notified of recommendation</span>
+      </div>
+    </div>
+    <button class="gen-btn" onclick="generateFall()">Generate Entry</button>
+    <button class="reset-btn" onclick="resetTab('fall')">Clear All</button>
+    <div class="out-card" id="fall-out">
+      <div class="out-header"><span class="out-label">Post-Fall Entry</span><span class="out-tag">Ready to Paste</span></div>
+      <div class="out-text" id="fall-text"></div>
+      <button class="copy-btn" id="fall-copy" onclick="copyOut('fall-text','fall-copy','Copy to Clipboard')">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-logo">CP</div>
+    <span class="footer-text">Built by Cliff Peters</span>
+  </div>
 </div>
 
 <script>
-var selectedPart = null;
-
-var phrases = {
-  consistent:{
-    attend:"has attended Health and Wellness sessions consistently throughout the month",
-    tone:"Resident demonstrates reliable engagement with the program and has shown a willingness to participate in scheduled activities."
-  },
-  good:{
-    attend:"has maintained good attendance with Health and Wellness sessions this month",
-    tone:"Resident demonstrates positive engagement with the program and participates willingly in scheduled activities."
-  },
-  fair:{
-    attend:"has attended Health and Wellness sessions on a fair basis this month",
-    tone:"Resident participates when present, though attendance has been variable at times."
-  },
-  inconsistent:{
-    attend:"has had inconsistent attendance with Health and Wellness sessions this month",
-    tone:"Participation has been variable. Staff will continue to encourage engagement and monitor attendance going forward."
-  },
-  declined:{
-    attend:"has frequently declined Health and Wellness sessions this month",
-    tone:"Resident has declined participation on multiple occasions. Staff will continue to offer sessions and monitor for changes in willingness to engage."
+function switchTab(id){
+  var ids=['hw','eval','dc','fall'];
+  document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',ids[i]===id);});
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+  document.getElementById('panel-'+id).classList.add('active');
+}
+function toggleHWFocus(el){el.classList.toggle('selected');}
+function getSelectedHWFocus(){return Array.from(document.querySelectorAll('#hw-focus-chips .chip.selected')).map(function(c){return c.dataset.focus;});}
+function toggleHWOverview(el){el.classList.toggle('selected');}
+function getSelectedHWOverview(){return Array.from(document.querySelectorAll('#hw-overview-chips .chip.selected')).map(function(c){return c.dataset.overview;});}
+function toggleHWChange(el){el.classList.toggle('selected');}
+function getSelectedHWChanges(){return Array.from(document.querySelectorAll('#hw-changes-chips .chip.selected')).map(function(c){return c.dataset.change;});}
+function generateHW(){
+  var focusChips=getSelectedHWFocus();
+  var focusOther=document.getElementById('hw-focus-other').value.trim();
+  var allFocus=focusChips.concat(focusOther?[focusOther]:[]);
+  var overviewChips=getSelectedHWOverview();
+  var overviewOther=document.getElementById('hw-overview').value.trim();
+  var changeChips=getSelectedHWChanges();
+  var changesOther=document.getElementById('hw-changes').value.trim();
+  var allChanges=changeChips.concat(changesOther?[changesOther]:[]);
+  if(!allFocus.length){alert('Please select at least one focus area.');return;}
+  if(!overviewChips.length&&!overviewOther){alert('Please select or enter a monthly overview.');return;}
+  var focusStr=formatList(allFocus);
+  var overviewParts=overviewChips.concat(overviewOther?[overviewOther]:[]);
+  var overviewStr=overviewParts.join(' ');
+  var entry='30 Day Health and Wellness Update: Resident participated in programming with a focus on '+focusStr+'. '+overviewStr.replace(/\.+$/,'.');
+  if(allChanges.length)entry+=' '+allChanges.join(' ');
+  document.getElementById('hw-text').textContent=entry;
+  var card=document.getElementById('hw-out');
+  card.classList.add('show');
+  setTimeout(function(){card.scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+function resetTab(tab){
+  if(tab==='hw'){
+    document.querySelectorAll('#hw-focus-chips .chip,#hw-overview-chips .chip,#hw-changes-chips .chip').forEach(function(c){c.classList.remove('selected');});
+    document.getElementById('hw-focus-other').value='';
+    document.getElementById('hw-overview').value='';
+    document.getElementById('hw-changes').value='';
+    document.getElementById('hw-out').classList.remove('show');
+  }else if(tab==='eval'){
+    document.querySelectorAll('#eval-discs .chip').forEach(function(c){c.className='chip disc-chip';});
+    document.querySelectorAll('#eval-focus-chips .chip').forEach(function(c){c.classList.remove('selected');});
+    document.getElementById('eval-focus-other').value='';
+    document.getElementById('eval-out').classList.remove('show');
+  }else if(tab==='dc'){
+    document.querySelectorAll('#dc-discs .chip').forEach(function(c){c.className='chip disc-chip';});
+    document.querySelectorAll('#dc-reason-chips .chip').forEach(function(c){c.classList.remove('selected');});
+    document.getElementById('dc-reason-other').value='';
+    document.getElementById('dc-hh-reinstate').checked=false;
+    document.getElementById('hh-toggle-row').style.display='none';
+    dcReason='';
+    document.getElementById('dc-out').classList.remove('show');
+  }else if(tab==='fall'){
+    document.getElementById('fall-location').value='';
+    document.getElementById('fall-on-therapy').checked=true;
+    document.getElementById('fall-rec-card').style.display='block';
+    document.querySelectorAll('#fall-rec-chips .chip').forEach(function(c){c.classList.remove('selected');});
+    document.getElementById('fall-rec-other').value='';
+    document.getElementById('fall-plan').value='';
+    document.getElementById('fall-family').checked=false;
+    document.getElementById('fall-out').classList.remove('show');
   }
-};
-
-document.querySelectorAll(".part-opt").forEach(function(opt){
-  opt.addEventListener("click",function(){
-    document.querySelectorAll(".part-opt").forEach(function(o){o.classList.remove("on");});
-    opt.classList.add("on");
-    selectedPart = opt.getAttribute("data-val");
-  });
-});
-
-document.getElementById("genBtn").addEventListener("click",function(){
-  var name     = document.getElementById("resName").value.trim();
-  var overview = document.getElementById("overview").value.trim();
-  var changes  = document.getElementById("changes").value.trim();
-
-  if(!name){alert("Please enter the resident name.");return;}
-  if(!selectedPart){alert("Please select an overall participation level.");return;}
-  if(!overview){alert("Please enter a brief monthly overview.");return;}
-
-  var p = phrases[selectedPart];
-  var changesLine = changes ? " Notable changes or concerns: "+changes.replace(/\.+$/,"")+"." : "";
-  var entry = "30 Day Health and Wellness Update: "+name+" "+p.attend+". "+p.tone+" Monthly Overview: "+overview.replace(/\.+$/,".")+changesLine;
-
-  document.getElementById("outText").textContent = entry;
-  var card = document.getElementById("outCard");
-  card.classList.add("show");
-  setTimeout(function(){card.scrollIntoView({behavior:"smooth",block:"start"});},50);
-});
-
-document.getElementById("copyBtn").addEventListener("click",function(){
-  var text = document.getElementById("outText").textContent;
-  var btn  = document.getElementById("copyBtn");
-  if(navigator.clipboard && window.isSecureContext){
-    navigator.clipboard.writeText(text).then(function(){
-      btn.textContent="Copied ✓";btn.classList.add("copied");
-      setTimeout(function(){btn.textContent="Copy to Clipboard";btn.classList.remove("copied");},2200);
-    });
-  } else {
-    var ta=document.createElement("textarea");
-    ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
-    document.body.appendChild(ta);ta.focus();ta.select();
-    try{document.execCommand("copy");btn.textContent="Copied ✓";btn.classList.add("copied");
-    setTimeout(function(){btn.textContent="Copy to Clipboard";btn.classList.remove("copied");},2200);}catch(e){}
-    document.body.removeChild(ta);
+}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function formatList(arr){
+  if(!arr.length)return'';
+  if(arr.length===1)return arr[0];
+  if(arr.length===2)return arr[0]+' and '+arr[1];
+  return arr.slice(0,-1).join(', ')+', and '+arr[arr.length-1];
+}
+function toggleDisc(el,prefix){
+  var disc=el.dataset.disc.toLowerCase();
+  var cls=disc+'-selected';
+  var was=el.classList.contains('selected');
+  el.classList.toggle('selected',!was);
+  el.classList.toggle(cls,!was);
+}
+function getSelectedDiscs(prefix){
+  return Array.from(document.querySelectorAll('#'+prefix+'-discs .disc-chip.selected')).map(function(c){return c.dataset.disc;});
+}
+function toggleFocus(el){el.classList.toggle('selected');}
+function getSelectedFocus(){
+  return Array.from(document.querySelectorAll('#eval-focus-chips .chip.selected')).map(function(c){return c.dataset.focus;});
+}
+function generateEval(){
+  var discs=getSelectedDiscs('eval');
+  var focusChips=getSelectedFocus();
+  var focusOther=document.getElementById('eval-focus-other').value.trim();
+  var allFocus=focusChips.concat(focusOther?[focusOther]:[]);
+  if(!discs.length){alert('Please select at least one discipline.');return;}
+  var discStr=formatList(discs);
+  var note=pick(['Resident was evaluated for Part B '+discStr+' services','Resident received a Part B '+discStr+' evaluation']);
+  note+=allFocus.length?'. Treatment will focus on '+formatList(allFocus)+'.':'.';
+  document.getElementById('eval-text').textContent=note;
+  var card=document.getElementById('eval-out');
+  card.classList.add('show');
+  setTimeout(function(){card.scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+var dcReason='';
+function selectReason(el){
+  document.querySelectorAll('#dc-reason-chips .chip').forEach(function(c){c.classList.remove('selected');});
+  el.classList.add('selected');
+  dcReason=el.dataset.reason;
+  var hhRow=document.getElementById('hh-toggle-row');
+  hhRow.style.display=dcReason==='transitioning to home health services'?'flex':'none';
+  if(dcReason!=='transitioning to home health services')document.getElementById('dc-hh-reinstate').checked=false;
+}
+function generateDC(){
+  var discs=getSelectedDiscs('dc');
+  var reasonOther=document.getElementById('dc-reason-other').value.trim();
+  var reinstate=document.getElementById('dc-hh-reinstate').checked;
+  if(!discs.length){alert('Please select at least one discipline.');return;}
+  if(!dcReason&&!reasonOther){alert('Please select or enter a discharge reason.');return;}
+  var discStr=formatList(discs);
+  if(dcReason==='transitioning to home health services'&&!reasonOther){
+    var note=reinstate?'Part B '+discStr+' discharged. Therapy services to resume under the home health.':'Discharge from Part B '+discStr+' services has been completed due to the resident\'s transition to home health.';
+    document.getElementById('dc-text').textContent=note;
+    document.getElementById('dc-out').classList.add('show');
+    setTimeout(function(){document.getElementById('dc-out').scrollIntoView({behavior:'smooth',block:'start'});},50);
+    return;
   }
-});
+  var map={'all goals met':['as all established therapy goals have been met','having successfully achieved all established goals','following successful attainment of all therapy goals'],'maximum functional potential reached':['as the resident has reached maximum functional potential','having achieved maximum functional potential at this time','as maximum functional gains have been reached'],'visit limits reached':['as authorized visit limits have been reached','following utilization of all authorized therapy visits','as the resident has reached the maximum authorized visit limit'],'transitioning to home health services':['in preparation for transition to home health services','as the resident is transitioning to home health',"due to the resident's transition to home health services"]};
+  var rp=dcReason?(map[dcReason]?pick(map[dcReason]):'due to '+dcReason):'';
+  if(reasonOther)rp=rp?rp+'; '+reasonOther:'due to '+reasonOther;
+  var note=pick(['Resident has been discharged from '+discStr+' services '+rp+'.','Resident is being discharged from '+discStr+' services '+rp+'.','Discharge from '+discStr+' services has been completed '+rp+'.']);
+  document.getElementById('dc-text').textContent=note;
+  document.getElementById('dc-out').classList.add('show');
+  setTimeout(function(){document.getElementById('dc-out').scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+function toggleRec(el){el.classList.toggle('selected');}
+function getSelectedRecs(){return Array.from(document.querySelectorAll('#fall-rec-chips .chip.selected')).map(function(c){return c.dataset.rec;});}
+function toggleTherapyStatus(){document.getElementById('fall-rec-card').style.display=document.getElementById('fall-on-therapy').checked?'block':'none';}
+function generateFall(){
+  var location=document.getElementById('fall-location').value.trim();
+  var onTherapy=document.getElementById('fall-on-therapy').checked;
+  var recs=getSelectedRecs();
+  var recOther=document.getElementById('fall-rec-other').value.trim();
+  var allRecs=recs.concat(recOther?[recOther]:[]);
+  var plan=document.getElementById('fall-plan').value.trim();
+  var family=document.getElementById('fall-family').checked;
+  if(!location){alert('Please enter the fall location.');return;}
+  if(onTherapy&&!allRecs.length){alert('Please select at least one safety recommendation.');return;}
+  var note='Resident assessed s/p fall '+location+'.';
+  if(onTherapy){
+    note+=' Resident is currently receiving therapy services.';
+    var recStr=formatList(allRecs);
+    note+=' '+recStr.charAt(0).toUpperCase()+recStr.slice(1)+' recommended to reduce injury risk with future falls.';
+  }else{
+    note+=pick([' Therapy evaluation recommended for fall risk assessment and safety equipment recommendations.',' Therapy evaluation indicated for fall risk assessment and safety equipment recommendations.',' Therapy evaluation recommended for fall risk and safety equipment assessment.']);
+  }
+  if(family)note+=' Family to be notified of recommendation.';
+  if(plan)note+=' '+plan;
+  document.getElementById('fall-text').textContent=note;
+  document.getElementById('fall-out').classList.add('show');
+  setTimeout(function(){document.getElementById('fall-out').scrollIntoView({behavior:'smooth',block:'start'});},50);
+}
+function copyOut(textId,btnId,defaultLabel){
+  var text=document.getElementById(textId).textContent;
+  var btn=document.getElementById(btnId);
+  var done=function(){btn.textContent='Copied \u2713';btn.classList.add('copied');setTimeout(function(){btn.textContent=defaultLabel;btn.classList.remove('copied');},2200);};
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(done).catch(function(){fallbackCopy(text,done);});}
+  else{fallbackCopy(text,done);}
+}
+function fallbackCopy(text,cb){
+  var ta=document.createElement('textarea');
+  ta.value=text;ta.style.cssText='position:fixed;opacity:0;';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');cb();}catch(e){}
+  document.body.removeChild(ta);
+}
 </script>
 </body>
 </html>
