@@ -1,15 +1,27 @@
 # Scribe
 
-## What It Does
+EMR note generator for Directors of Rehabilitation. Produces audit-defensible clinical entries ready to paste into any EMR.
 
-Generates 30-day Health and Wellness participation updates ready to paste directly into any EMR. Enter the resident's name, select their participation level, add a brief monthly overview, and Scribe produces a clean, consistent clinical entry in seconds.
+Live: https://cliff-peters.github.io/scribe
+
+## Tabs
+
+**H&W 30-Day** — Monthly Health & Wellness participation update. Select focus areas, participation level, and add a monthly overview.
+
+**Eval & Frequency** — Post-evaluation note with discipline, diagnosis, functional limitations, goals, and visit frequency.
+
+**Discharge** — Discharge summary with reason, functional progress, and final status.
+
+**Post-Fall** — Post-fall clinical note with intervention details and follow-up plan.
 
 ## Features
 
-- Five participation levels: Consistent, Good, Fair, Inconsistent, and Frequently Declined
-- Free-text monthly overview and optional notable changes field
+- Randomized phrasing on each generation to avoid identical outputs
 - One-click copy to clipboard
-- Works in any browser, no login or setup required
-- EMR-agnostic - output pastes into any system
+- EMR-agnostic — output pastes into any system
+- No data stored or transmitted — runs entirely in the browser
+- Single HTML file, no dependencies
 
-#
+## Part of The DOR Suite
+
+https://cliff-peters.github.io
