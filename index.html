@@ -10,28 +10,28 @@
 :root{
   --bg:#0c0f14;--surface:#181d28;--surface2:#1e2430;--border:#333a48;
   --text:#f0f2f5;--muted:#9ca3b4;
-  --blue:#5a9de6;--green:#3ecf7a;--amber:#f0a830;--red:#ef4444;--teal:#2dd4bf;
+  --blue:#2dd4bf;--green:#3ecf7a;--amber:#f0a830;--red:#ef4444;--teal:#2dd4bf;
   --logo-gradient:linear-gradient(135deg,#4a90d9,#3ecf7a);--logo-text:#0c0f14;
 }
 body{min-height:100vh;background:var(--bg);font-family:"Mulish",sans-serif;color:var(--text);padding:0 0 80px;}
-.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+.hdr{background:var(--surface);border-top:3px solid #2dd4bf;border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
 .cp-logo{width:44px;height:44px;background:var(--logo-gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:900;color:var(--logo-text);flex-shrink:0;letter-spacing:0.02em;}
 .hdr-eyebrow{font-size:9px;font-weight:800;letter-spacing:0.14em;color:var(--blue);text-transform:uppercase;margin-bottom:2px;}
-.hdr-title{font-size:18px;font-weight:800;color:var(--text);line-height:1;}
-.hdr-title span{color:var(--blue);}
+.hdr-title{font-size:22px;font-weight:800;color:var(--text);line-height:1;}
+.hdr-title span{color:#2dd4bf;}
 .tab-bar{display:flex;gap:4px;padding:20px 24px 0;border-bottom:1px solid var(--border);background:var(--surface);overflow-x:auto;}
-.tab-btn{padding:10px 18px;font-family:"Mulish",sans-serif;font-size:13px;font-weight:700;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s;}
-.tab-btn:hover{color:var(--text);}
-.tab-btn.active{color:var(--green);border-bottom-color:var(--green);}
+.tab-btn{padding:10px 18px;font-family:"Mulish",sans-serif;font-size:13px;font-weight:700;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:color .2s,border-color .2s,background .2s;border-radius:6px 6px 0 0;}
+.tab-btn:hover{color:var(--text);background:rgba(255,255,255,0.04);}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);background:rgba(45,212,191,0.1);}
 .main{max-width:720px;margin:0 auto;padding:32px 24px 0;}
 .panel{display:none;}
-.panel.active{display:block;}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:16px;}
+.panel.active{display:block;animation:fadeUp .2s ease;}
+.card{background:var(--surface);border:1px solid var(--border);border-top:3px solid #2dd4bf;border-radius:10px;padding:22px;margin-bottom:16px;}
 .card-title{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
 label{display:block;font-size:9px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
 input[type=text],textarea,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-family:"Mulish",sans-serif;font-size:.95rem;font-weight:600;color:var(--text);outline:none;transition:border-color .15s;}
 input[type=text]::placeholder,textarea::placeholder{color:var(--border);}
-input[type=text]:focus,textarea:focus,select:focus{border-color:rgba(90,157,230,0.5);}
+input[type=text]:focus,textarea:focus,select:focus{border-color:rgba(45,212,191,0.5);}
 textarea{resize:vertical;min-height:90px;line-height:1.65;}
 select option{background:var(--surface2);}
 .field{margin-bottom:14px;}
@@ -39,10 +39,10 @@ select option{background:var(--surface2);}
 .chip-group{display:flex;flex-wrap:wrap;gap:8px;}
 .chip{padding:7px 18px;border-radius:20px;border:1px solid var(--border);background:var(--surface2);font-family:"Mulish",sans-serif;font-size:.88rem;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;}
 .chip:hover{border-color:var(--blue);color:var(--blue);}
-.chip.selected{background:rgba(90,157,230,0.1);border-color:var(--blue);color:var(--blue);}
-.chip.disc-chip.pt-selected{background:rgba(90,157,230,0.12);border-color:var(--blue);color:var(--blue);}
-.chip.disc-chip.ot-selected{background:rgba(240,168,48,0.12);border-color:var(--amber);color:var(--amber);}
-.chip.disc-chip.st-selected{background:rgba(62,207,122,0.12);border-color:var(--green);color:var(--green);}
+.chip.selected{background:rgba(45,212,191,0.1);border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 3px rgba(45,212,191,0.15);}
+.chip.disc-chip.pt-selected{background:rgba(45,212,191,0.12);border-color:var(--blue);color:var(--blue);box-shadow:0 0 0 3px rgba(45,212,191,0.15);}
+.chip.disc-chip.ot-selected{background:rgba(240,168,48,0.12);border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 3px rgba(240,168,48,0.15);}
+.chip.disc-chip.st-selected{background:rgba(62,207,122,0.12);border-color:var(--green);color:var(--green);box-shadow:0 0 0 3px rgba(62,207,122,0.15);}
 .toggle-row{display:flex;align-items:center;gap:12px;}
 .toggle{position:relative;width:44px;height:24px;flex-shrink:0;}
 .toggle input{opacity:0;width:0;height:0;position:absolute;}
@@ -52,10 +52,10 @@ select option{background:var(--surface2);}
 .toggle input:checked~.toggle-thumb{transform:translateX(20px);}
 .toggle-label{font-size:13px;font-weight:700;color:var(--text);cursor:pointer;user-select:none;}
 .gen-btn{width:100%;padding:14px;background:var(--blue);border:none;border-radius:8px;color:#fff;font-family:"Mulish",sans-serif;font-size:12px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;margin-bottom:14px;}
-.gen-btn:hover{background:#6aade6;transform:translateY(-1px);}
+.gen-btn:hover{background:#26c4b4;transform:translateY(-1px);}
 .gen-btn:active{transform:scale(.98);}
 .out-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:none;}
-.out-card.show{display:block;animation:fadeUp .25s ease;}
+.out-card.show{display:block;animation:fadeUp .25s ease;border-left:3px solid #2dd4bf;border-color:rgba(45,212,191,0.3);box-shadow:0 4px 24px rgba(45,212,191,0.07);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 .out-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--border);}
 .out-label{font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
@@ -68,7 +68,17 @@ select option{background:var(--surface2);}
 .footer-text{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:0.04em;}
 .reset-btn{width:100%;padding:10px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-family:"Mulish",sans-serif;font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;transition:all .15s;margin-bottom:16px;}
 .reset-btn:hover{border-color:var(--red);color:var(--red);}
-@media(max-width:600px){.hdr{padding:12px 16px;}.main{padding:20px 16px 0;}}
+@media(max-width:600px){
+  .hdr{padding:12px 16px;}
+  .hdr-title{font-size:18px;}
+  .tab-bar{padding:12px 16px 0;flex-wrap:wrap;gap:4px;}
+  .tab-btn{padding:8px 12px;font-size:12px;}
+  .main{padding:16px 16px 0;}
+  .card{padding:16px;}
+  .chip{padding:6px 14px;font-size:.82rem;}
+  .out-text{font-size:12px;line-height:1.7;}
+  .copy-btn{width:100%;text-align:center;}
+}
 </style>
 </head>
 <body>
@@ -76,14 +86,13 @@ select option{background:var(--surface2);}
 <div class="hdr">
   <div class="cp-logo">CP</div>
   <div>
-    <div class="hdr-eyebrow">The DOR Suite</div>
     <div class="hdr-title">EMR <span>Scribe</span></div>
   </div>
 </div>
 
 <div class="tab-bar">
   <button type="button" class="tab-btn active" onclick="switchTab('hw')" aria-label="Documentation: H and W 30-day">H&amp;W 30-Day</button>
-  <button type="button" class="tab-btn" onclick="switchTab('eval')" aria-label="Documentation: eval and frequency">Eval &amp; Frequency</button>
+  <button type="button" class="tab-btn" onclick="switchTab('eval')" aria-label="Documentation: eval">Eval</button>
   <button type="button" class="tab-btn" onclick="switchTab('dc')" aria-label="Documentation: discharge">Discharge</button>
   <button type="button" class="tab-btn" onclick="switchTab('fall')" aria-label="Documentation: post-fall">Post-Fall</button>
 </div>
@@ -177,7 +186,7 @@ select option{background:var(--surface2);}
     <button type="button" class="gen-btn" onclick="generateEval()">Generate Entry</button>
     <button type="button" class="reset-btn" onclick="resetTab('eval')">Clear All</button>
     <div class="out-card" id="eval-out">
-      <div class="out-header"><span class="out-label">Eval &amp; Frequency Entry</span><span class="out-tag">Ready to Paste</span></div>
+      <div class="out-header"><span class="out-label">Eval Entry</span><span class="out-tag">Ready to Paste</span></div>
       <div class="out-text" id="eval-text"></div>
       <button type="button" class="copy-btn" id="eval-copy" onclick="copyOut('eval-text','eval-copy','Copy to Clipboard')" aria-label="Copy generated note to clipboard">Copy to Clipboard</button>
     </div>
