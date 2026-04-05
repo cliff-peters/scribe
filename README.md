@@ -8,7 +8,7 @@ Live: https://cliff-peters.github.io/scribe
 
 **H&W 30-Day** — Monthly Health & Wellness participation update. Select focus areas, participation level, and add a monthly overview.
 
-**Eval & Frequency** — Post-evaluation note with discipline, diagnosis, functional limitations, goals, and visit frequency.
+**Evaluation & Frequency** — Post-evaluation note with discipline, diagnosis, functional limitations, goals, and visit frequency.
 
 **Discharge** — Discharge summary with reason, functional progress, and final status.
 
