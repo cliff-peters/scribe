@@ -2,7 +2,7 @@
 
 EMR note generator for Directors of Rehabilitation. Produces audit-defensible clinical entries ready to paste into any EMR.
 
-Live: https://cliff-peters.github.io/scribe
+Live: [https://cliff-peters.github.io/scribe](https://cliff-peters.github.io/scribe)
 
 ## Tabs
 
@@ -24,4 +24,4 @@ Live: https://cliff-peters.github.io/scribe
 
 ## Part of The DOR Suite
 
-https://cliff-peters.github.io
+[https://cliff-peters.github.io](https://cliff-peters.github.io)
