@@ -82,10 +82,10 @@ select option{background:var(--surface2);}
 </div>
 
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('hw')">H&amp;W 30-Day</button>
-  <button class="tab-btn" onclick="switchTab('eval')">Eval &amp; Frequency</button>
-  <button class="tab-btn" onclick="switchTab('dc')">Discharge</button>
-  <button class="tab-btn" onclick="switchTab('fall')">Post-Fall</button>
+  <button type="button" class="tab-btn active" onclick="switchTab('hw')" aria-label="Documentation: H and W 30-day">H&amp;W 30-Day</button>
+  <button type="button" class="tab-btn" onclick="switchTab('eval')" aria-label="Documentation: eval and frequency">Eval &amp; Frequency</button>
+  <button type="button" class="tab-btn" onclick="switchTab('dc')" aria-label="Documentation: discharge">Discharge</button>
+  <button type="button" class="tab-btn" onclick="switchTab('fall')" aria-label="Documentation: post-fall">Post-Fall</button>
 </div>
 
 <div class="main">
@@ -95,16 +95,16 @@ select option{background:var(--surface2);}
     <div class="card" style="margin-top:4px;">
       <div class="card-title">Focus Area(s)</div>
       <div class="chip-group" id="hw-focus-chips" style="margin-bottom:14px;">
-        <button class="chip" data-focus="strength" onclick="toggleHWFocus(this)">Strength</button>
-        <button class="chip" data-focus="balance" onclick="toggleHWFocus(this)">Balance</button>
-        <button class="chip" data-focus="ambulation" onclick="toggleHWFocus(this)">Ambulation</button>
-        <button class="chip" data-focus="flexibility" onclick="toggleHWFocus(this)">Flexibility</button>
-        <button class="chip" data-focus="coordination" onclick="toggleHWFocus(this)">Coordination</button>
-        <button class="chip" data-focus="endurance" onclick="toggleHWFocus(this)">Endurance</button>
-        <button class="chip" data-focus="range of motion" onclick="toggleHWFocus(this)">Range of Motion</button>
-        <button class="chip" data-focus="posture" onclick="toggleHWFocus(this)">Posture</button>
-        <button class="chip" data-focus="fine motor skills" onclick="toggleHWFocus(this)">Fine Motor Skills</button>
-        <button class="chip" data-focus="social engagement" onclick="toggleHWFocus(this)">Social Engagement</button>
+        <button type="button" class="chip" data-focus="strength" onclick="toggleHWFocus(this)">Strength</button>
+        <button type="button" class="chip" data-focus="balance" onclick="toggleHWFocus(this)">Balance</button>
+        <button type="button" class="chip" data-focus="ambulation" onclick="toggleHWFocus(this)">Ambulation</button>
+        <button type="button" class="chip" data-focus="flexibility" onclick="toggleHWFocus(this)">Flexibility</button>
+        <button type="button" class="chip" data-focus="coordination" onclick="toggleHWFocus(this)">Coordination</button>
+        <button type="button" class="chip" data-focus="endurance" onclick="toggleHWFocus(this)">Endurance</button>
+        <button type="button" class="chip" data-focus="range of motion" onclick="toggleHWFocus(this)">Range of Motion</button>
+        <button type="button" class="chip" data-focus="posture" onclick="toggleHWFocus(this)">Posture</button>
+        <button type="button" class="chip" data-focus="fine motor skills" onclick="toggleHWFocus(this)">Fine Motor Skills</button>
+        <button type="button" class="chip" data-focus="social engagement" onclick="toggleHWFocus(this)">Social Engagement</button>
       </div>
       <div class="field">
         <label>Additional focus <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
@@ -114,11 +114,11 @@ select option{background:var(--surface2);}
     <div class="card">
       <div class="card-title">Monthly Overview</div>
       <div class="chip-group" id="hw-overview-chips" style="margin-bottom:14px;">
-        <button class="chip" data-overview="Resident is engaged and motivated." onclick="toggleHWOverview(this)">Engaged &amp; Motivated</button>
-        <button class="chip" data-overview="Resident continues to make progress." onclick="toggleHWOverview(this)">Making Progress</button>
-        <button class="chip" data-overview="Resident is responding well to programming." onclick="toggleHWOverview(this)">Responding Well</button>
-        <button class="chip" data-overview="Resident remains active and participatory." onclick="toggleHWOverview(this)">Active &amp; Participatory</button>
-        <button class="chip" data-overview="Resident has shown improvement throughout the month." onclick="toggleHWOverview(this)">Showing Improvement</button>
+        <button type="button" class="chip" data-overview="Resident is engaged and motivated." onclick="toggleHWOverview(this)">Engaged &amp; Motivated</button>
+        <button type="button" class="chip" data-overview="Resident continues to make progress." onclick="toggleHWOverview(this)">Making Progress</button>
+        <button type="button" class="chip" data-overview="Resident is responding well to programming." onclick="toggleHWOverview(this)">Responding Well</button>
+        <button type="button" class="chip" data-overview="Resident remains active and participatory." onclick="toggleHWOverview(this)">Active &amp; Participatory</button>
+        <button type="button" class="chip" data-overview="Resident has shown improvement throughout the month." onclick="toggleHWOverview(this)">Showing Improvement</button>
       </div>
       <div class="field">
         <label>Additional detail <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
@@ -127,20 +127,20 @@ select option{background:var(--surface2);}
       <div class="field">
         <label>Notable changes or concerns <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
         <div class="chip-group" id="hw-changes-chips" style="margin-bottom:10px;">
-          <button class="chip" data-change="Resident missed sessions due to illness." onclick="toggleHWChange(this)">Missed — Illness</button>
-          <button class="chip" data-change="Resident was recently hospitalized." onclick="toggleHWChange(this)">Recent Hospitalization</button>
-          <button class="chip" data-change="Resident has experienced a change in condition." onclick="toggleHWChange(this)">Change in Condition</button>
-          <button class="chip" data-change="Resident experienced a recent fall." onclick="toggleHWChange(this)">Recent Fall</button>
+          <button type="button" class="chip" data-change="Resident missed sessions due to illness." onclick="toggleHWChange(this)">Missed — Illness</button>
+          <button type="button" class="chip" data-change="Resident was recently hospitalized." onclick="toggleHWChange(this)">Recent Hospitalization</button>
+          <button type="button" class="chip" data-change="Resident has experienced a change in condition." onclick="toggleHWChange(this)">Change in Condition</button>
+          <button type="button" class="chip" data-change="Resident experienced a recent fall." onclick="toggleHWChange(this)">Recent Fall</button>
         </div>
         <input type="text" id="hw-changes" placeholder="Additional notes (optional)..."/>
       </div>
     </div>
-    <button class="gen-btn" onclick="generateHW()">Generate Entry</button>
-    <button class="reset-btn" onclick="resetTab('hw')">Clear All</button>
+    <button type="button" class="gen-btn" onclick="generateHW()">Generate Entry</button>
+    <button type="button" class="reset-btn" onclick="resetTab('hw')">Clear All</button>
     <div class="out-card" id="hw-out">
       <div class="out-header"><span class="out-label">30-Day H&amp;W Entry</span><span class="out-tag">Ready to Paste</span></div>
       <div class="out-text" id="hw-text"></div>
-      <button class="copy-btn" id="hw-copy" onclick="copyOut('hw-text','hw-copy','Copy to Clipboard')">Copy to Clipboard</button>
+      <button type="button" class="copy-btn" id="hw-copy" onclick="copyOut('hw-text','hw-copy','Copy to Clipboard')" aria-label="Copy generated note to clipboard">Copy to Clipboard</button>
     </div>
   </div>
 
@@ -149,37 +149,37 @@ select option{background:var(--surface2);}
     <div class="card" style="margin-top:4px;">
       <div class="card-title">Discipline(s)</div>
       <div class="chip-group" id="eval-discs">
-        <button class="chip disc-chip" data-disc="PT" onclick="toggleDisc(this,'eval')">PT</button>
-        <button class="chip disc-chip" data-disc="OT" onclick="toggleDisc(this,'eval')">OT</button>
-        <button class="chip disc-chip" data-disc="ST" onclick="toggleDisc(this,'eval')">ST</button>
+        <button type="button" class="chip disc-chip" data-disc="PT" onclick="toggleDisc(this,'eval')">PT</button>
+        <button type="button" class="chip disc-chip" data-disc="OT" onclick="toggleDisc(this,'eval')">OT</button>
+        <button type="button" class="chip disc-chip" data-disc="ST" onclick="toggleDisc(this,'eval')">ST</button>
       </div>
     </div>
     <div class="card">
       <div class="card-title">Focus Area(s)</div>
       <div class="chip-group" id="eval-focus-chips" style="margin-bottom:14px;">
-        <button class="chip" data-focus="functional mobility" onclick="toggleFocus(this)">Functional Mobility</button>
-        <button class="chip" data-focus="LE strengthening" onclick="toggleFocus(this)">LE Strengthening</button>
-        <button class="chip" data-focus="fall risk reduction" onclick="toggleFocus(this)">Fall Risk Reduction</button>
-        <button class="chip" data-focus="ADL independence" onclick="toggleFocus(this)">ADL Independence</button>
-        <button class="chip" data-focus="balance training" onclick="toggleFocus(this)">Balance Training</button>
-        <button class="chip" data-focus="UE strengthening" onclick="toggleFocus(this)">UE Strengthening</button>
-        <button class="chip" data-focus="cognitive strategies" onclick="toggleFocus(this)">Cognitive Strategies</button>
-        <button class="chip" data-focus="safety awareness" onclick="toggleFocus(this)">Safety Awareness</button>
-        <button class="chip" data-focus="dysphagia management" onclick="toggleFocus(this)">Dysphagia Management</button>
-        <button class="chip" data-focus="pain management" onclick="toggleFocus(this)">Pain Management</button>
-        <button class="chip" data-focus="endurance" onclick="toggleFocus(this)">Endurance</button>
+        <button type="button" class="chip" data-focus="functional mobility" onclick="toggleFocus(this)">Functional Mobility</button>
+        <button type="button" class="chip" data-focus="LE strengthening" onclick="toggleFocus(this)">LE Strengthening</button>
+        <button type="button" class="chip" data-focus="fall risk reduction" onclick="toggleFocus(this)">Fall Risk Reduction</button>
+        <button type="button" class="chip" data-focus="ADL independence" onclick="toggleFocus(this)">ADL Independence</button>
+        <button type="button" class="chip" data-focus="balance training" onclick="toggleFocus(this)">Balance Training</button>
+        <button type="button" class="chip" data-focus="UE strengthening" onclick="toggleFocus(this)">UE Strengthening</button>
+        <button type="button" class="chip" data-focus="cognitive strategies" onclick="toggleFocus(this)">Cognitive Strategies</button>
+        <button type="button" class="chip" data-focus="safety awareness" onclick="toggleFocus(this)">Safety Awareness</button>
+        <button type="button" class="chip" data-focus="dysphagia management" onclick="toggleFocus(this)">Dysphagia Management</button>
+        <button type="button" class="chip" data-focus="pain management" onclick="toggleFocus(this)">Pain Management</button>
+        <button type="button" class="chip" data-focus="endurance" onclick="toggleFocus(this)">Endurance</button>
       </div>
       <div class="field">
         <label>Additional focus <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
         <input type="text" id="eval-focus-other" placeholder="Any other specific focus areas..."/>
       </div>
     </div>
-    <button class="gen-btn" onclick="generateEval()">Generate Entry</button>
-    <button class="reset-btn" onclick="resetTab('eval')">Clear All</button>
+    <button type="button" class="gen-btn" onclick="generateEval()">Generate Entry</button>
+    <button type="button" class="reset-btn" onclick="resetTab('eval')">Clear All</button>
     <div class="out-card" id="eval-out">
       <div class="out-header"><span class="out-label">Eval &amp; Frequency Entry</span><span class="out-tag">Ready to Paste</span></div>
       <div class="out-text" id="eval-text"></div>
-      <button class="copy-btn" id="eval-copy" onclick="copyOut('eval-text','eval-copy','Copy to Clipboard')">Copy to Clipboard</button>
+      <button type="button" class="copy-btn" id="eval-copy" onclick="copyOut('eval-text','eval-copy','Copy to Clipboard')" aria-label="Copy generated note to clipboard">Copy to Clipboard</button>
     </div>
   </div>
 
@@ -188,18 +188,18 @@ select option{background:var(--surface2);}
     <div class="card" style="margin-top:4px;">
       <div class="card-title">Discipline(s)</div>
       <div class="chip-group" id="dc-discs">
-        <button class="chip disc-chip" data-disc="PT" onclick="toggleDisc(this,'dc')">PT</button>
-        <button class="chip disc-chip" data-disc="OT" onclick="toggleDisc(this,'dc')">OT</button>
-        <button class="chip disc-chip" data-disc="ST" onclick="toggleDisc(this,'dc')">ST</button>
+        <button type="button" class="chip disc-chip" data-disc="PT" onclick="toggleDisc(this,'dc')">PT</button>
+        <button type="button" class="chip disc-chip" data-disc="OT" onclick="toggleDisc(this,'dc')">OT</button>
+        <button type="button" class="chip disc-chip" data-disc="ST" onclick="toggleDisc(this,'dc')">ST</button>
       </div>
     </div>
     <div class="card">
       <div class="card-title">Discharge Reason</div>
       <div class="chip-group" id="dc-reason-chips" style="margin-bottom:14px;">
-        <button class="chip" data-reason="all goals met" onclick="selectReason(this)">All Goals Met</button>
-        <button class="chip" data-reason="maximum functional potential reached" onclick="selectReason(this)">Max Functional Potential</button>
-        <button class="chip" data-reason="visit limits reached" onclick="selectReason(this)">Visit Limits Reached</button>
-        <button class="chip" data-reason="transitioning to home health services" onclick="selectReason(this)">Home Health</button>
+        <button type="button" class="chip" data-reason="all goals met" onclick="selectReason(this)">All Goals Met</button>
+        <button type="button" class="chip" data-reason="maximum functional potential reached" onclick="selectReason(this)">Max Functional Potential</button>
+        <button type="button" class="chip" data-reason="visit limits reached" onclick="selectReason(this)">Visit Limits Reached</button>
+        <button type="button" class="chip" data-reason="transitioning to home health services" onclick="selectReason(this)">Home Health</button>
       </div>
       <div class="field">
         <label>Other reason <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(overrides picker above)</span></label>
@@ -214,12 +214,12 @@ select option{background:var(--surface2);}
         <span class="toggle-label" onclick="document.getElementById('dc-hh-reinstate').click()">Therapy to be reinstated under home health</span>
       </div>
     </div>
-    <button class="gen-btn" onclick="generateDC()">Generate Entry</button>
-    <button class="reset-btn" onclick="resetTab('dc')">Clear All</button>
+    <button type="button" class="gen-btn" onclick="generateDC()">Generate Entry</button>
+    <button type="button" class="reset-btn" onclick="resetTab('dc')">Clear All</button>
     <div class="out-card" id="dc-out">
       <div class="out-header"><span class="out-label">Discharge Entry</span><span class="out-tag">Ready to Paste</span></div>
       <div class="out-text" id="dc-text"></div>
-      <button class="copy-btn" id="dc-copy" onclick="copyOut('dc-text','dc-copy','Copy to Clipboard')">Copy to Clipboard</button>
+      <button type="button" class="copy-btn" id="dc-copy" onclick="copyOut('dc-text','dc-copy','Copy to Clipboard')" aria-label="Copy generated note to clipboard">Copy to Clipboard</button>
     </div>
   </div>
 
@@ -245,17 +245,17 @@ select option{background:var(--surface2);}
     <div class="card" id="fall-rec-card">
       <div class="card-title">Safety Recommendation(s)</div>
       <div class="chip-group" id="fall-rec-chips" style="margin-bottom:14px;">
-        <button class="chip" data-rec="raised toilet seat" onclick="toggleRec(this)">Raised Toilet Seat</button>
-        <button class="chip" data-rec="bed cane" onclick="toggleRec(this)">Bed Cane</button>
-        <button class="chip" data-rec="fall mat" onclick="toggleRec(this)">Fall Mat</button>
-        <button class="chip" data-rec="bed placed at lowest position" onclick="toggleRec(this)">Bed Lowest Position</button>
-        <button class="chip" data-rec="non-slip bath rug" onclick="toggleRec(this)">Non-Slip Bath Rug</button>
-        <button class="chip" data-rec="least restrictive assistive device" onclick="toggleRec(this)">LRAD</button>
-        <button class="chip" data-rec="environmental modifications" onclick="toggleRec(this)">Environmental Modifications</button>
-        <button class="chip" data-rec="shower chair" onclick="toggleRec(this)">Shower Chair</button>
-        <button class="chip" data-rec="non-slip footwear" onclick="toggleRec(this)">Non-Slip Footwear</button>
-        <button class="chip" data-rec="positioning wedge" onclick="toggleRec(this)">Positioning Wedge</button>
-        <button class="chip" data-rec="adjustable height bed" onclick="toggleRec(this)">Adjustable Height Bed</button>
+        <button type="button" class="chip" data-rec="raised toilet seat" onclick="toggleRec(this)">Raised Toilet Seat</button>
+        <button type="button" class="chip" data-rec="bed cane" onclick="toggleRec(this)">Bed Cane</button>
+        <button type="button" class="chip" data-rec="fall mat" onclick="toggleRec(this)">Fall Mat</button>
+        <button type="button" class="chip" data-rec="bed placed at lowest position" onclick="toggleRec(this)">Bed Lowest Position</button>
+        <button type="button" class="chip" data-rec="non-slip bath rug" onclick="toggleRec(this)">Non-Slip Bath Rug</button>
+        <button type="button" class="chip" data-rec="least restrictive assistive device" onclick="toggleRec(this)">LRAD</button>
+        <button type="button" class="chip" data-rec="environmental modifications" onclick="toggleRec(this)">Environmental Modifications</button>
+        <button type="button" class="chip" data-rec="shower chair" onclick="toggleRec(this)">Shower Chair</button>
+        <button type="button" class="chip" data-rec="non-slip footwear" onclick="toggleRec(this)">Non-Slip Footwear</button>
+        <button type="button" class="chip" data-rec="positioning wedge" onclick="toggleRec(this)">Positioning Wedge</button>
+        <button type="button" class="chip" data-rec="adjustable height bed" onclick="toggleRec(this)">Adjustable Height Bed</button>
       </div>
       <div class="field">
         <label>Additional recommendation <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
@@ -277,12 +277,12 @@ select option{background:var(--surface2);}
         <span class="toggle-label" onclick="document.getElementById('fall-family').click()">Family to be notified of recommendation</span>
       </div>
     </div>
-    <button class="gen-btn" onclick="generateFall()">Generate Entry</button>
-    <button class="reset-btn" onclick="resetTab('fall')">Clear All</button>
+    <button type="button" class="gen-btn" onclick="generateFall()">Generate Entry</button>
+    <button type="button" class="reset-btn" onclick="resetTab('fall')">Clear All</button>
     <div class="out-card" id="fall-out">
       <div class="out-header"><span class="out-label">Post-Fall Entry</span><span class="out-tag">Ready to Paste</span></div>
       <div class="out-text" id="fall-text"></div>
-      <button class="copy-btn" id="fall-copy" onclick="copyOut('fall-text','fall-copy','Copy to Clipboard')">Copy to Clipboard</button>
+      <button type="button" class="copy-btn" id="fall-copy" onclick="copyOut('fall-text','fall-copy','Copy to Clipboard')" aria-label="Copy generated note to clipboard">Copy to Clipboard</button>
     </div>
   </div>
 
