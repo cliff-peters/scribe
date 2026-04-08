@@ -91,16 +91,16 @@ select option{background:var(--surface2);}
 </div>
 
 <div class="tab-bar">
-  <button type="button" class="tab-btn active" onclick="switchTab('hw')" aria-label="Documentation: H and W 30-day">H&amp;W 30-Day</button>
-  <button type="button" class="tab-btn" onclick="switchTab('eval')" aria-label="Documentation: evaluation">Evaluation</button>
+  <button type="button" class="tab-btn active" onclick="switchTab('eval')" aria-label="Documentation: evaluation">Evaluation</button>
   <button type="button" class="tab-btn" onclick="switchTab('dc')" aria-label="Documentation: discharge">Discharge</button>
   <button type="button" class="tab-btn" onclick="switchTab('fall')" aria-label="Documentation: post-fall">Post-Fall</button>
+  <button type="button" class="tab-btn" onclick="switchTab('hw')" aria-label="Documentation: H and W 30-day">H&amp;W 30-Day</button>
 </div>
 
 <div class="main">
 
   <!-- H&W 30-DAY -->
-  <div class="panel active" id="panel-hw">
+  <div class="panel" id="panel-hw">
     <div class="card" style="margin-top:4px;">
       <div class="card-title">Focus Area(s)</div>
       <div class="chip-group" id="hw-focus-chips" style="margin-bottom:14px;">
@@ -154,7 +154,7 @@ select option{background:var(--surface2);}
   </div>
 
   <!-- EVAL & FREQUENCY -->
-  <div class="panel" id="panel-eval">
+  <div class="panel active" id="panel-eval">
     <div class="card" style="margin-top:4px;">
       <div class="card-title">Discipline(s)</div>
       <div class="chip-group" id="eval-discs">
@@ -311,7 +311,7 @@ select option{background:var(--surface2);}
 
 <script>
 function switchTab(id){
-  var ids=['hw','eval','dc','fall'];
+  var ids=['eval','dc','fall','hw'];
   document.querySelectorAll('.tab-btn').forEach(function(b,i){b.classList.toggle('active',ids[i]===id);});
   document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
   document.getElementById('panel-'+id).classList.add('active');
