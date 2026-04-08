@@ -273,6 +273,14 @@ select option{background:var(--surface2);}
     </div>
     <div class="card">
       <div class="card-title">Additional Details</div>
+      <div class="toggle-row" style="margin-bottom:14px;">
+        <label class="toggle" for="fall-interventions">
+          <input type="checkbox" id="fall-interventions" onchange="toggleInterventions()"/>
+          <div class="toggle-track"></div>
+          <div class="toggle-thumb"></div>
+        </label>
+        <span class="toggle-label" onclick="document.getElementById('fall-interventions').click()">All interventions in place</span>
+      </div>
       <div class="field">
         <label>Therapy plan continuation <span style="color:var(--muted);font-weight:600;text-transform:none;letter-spacing:0;">(optional)</span></label>
         <textarea id="fall-plan" placeholder="Shorthand for therapy plan details — leave blank to omit..." style="min-height:64px;"></textarea>
@@ -359,6 +367,7 @@ function resetTab(tab){
     document.getElementById('fall-location').value='';
     document.getElementById('fall-on-therapy').checked=true;
     document.getElementById('fall-rec-card').style.display='block';
+    document.getElementById('fall-interventions').checked=false;
     document.querySelectorAll('#fall-rec-chips .chip').forEach(function(c){c.classList.remove('selected');});
     document.getElementById('fall-rec-other').value='';
     document.getElementById('fall-plan').value='';
@@ -434,7 +443,16 @@ function generateDC(){
 }
 function toggleRec(el){el.classList.toggle('selected');}
 function getSelectedRecs(){return Array.from(document.querySelectorAll('#fall-rec-chips .chip.selected')).map(function(c){return c.dataset.rec;});}
-function toggleTherapyStatus(){document.getElementById('fall-rec-card').style.display=document.getElementById('fall-on-therapy').checked?'block':'none';}
+function toggleTherapyStatus(){
+  var onTherapy=document.getElementById('fall-on-therapy').checked;
+  var interventions=document.getElementById('fall-interventions').checked;
+  document.getElementById('fall-rec-card').style.display=(onTherapy&&!interventions)?'block':'none';
+}
+function toggleInterventions(){
+  var interventions=document.getElementById('fall-interventions').checked;
+  var onTherapy=document.getElementById('fall-on-therapy').checked;
+  document.getElementById('fall-rec-card').style.display=(onTherapy&&!interventions)?'block':'none';
+}
 function generateFall(){
   var location=document.getElementById('fall-location').value.trim();
   var onTherapy=document.getElementById('fall-on-therapy').checked;
@@ -443,13 +461,18 @@ function generateFall(){
   var allRecs=recs.concat(recOther?[recOther]:[]);
   var plan=document.getElementById('fall-plan').value.trim();
   var family=document.getElementById('fall-family').checked;
+  var interventions=document.getElementById('fall-interventions').checked;
   if(!location){alert('Please enter the fall location.');return;}
-  if(onTherapy&&!allRecs.length){alert('Please select at least one safety recommendation.');return;}
+  if(onTherapy&&!interventions&&!allRecs.length){alert('Please select at least one safety recommendation.');return;}
   var note='Resident assessed s/p fall '+location+'.';
   if(onTherapy){
-    note+=' Resident is currently receiving therapy services.';
-    var recStr=formatList(allRecs);
-    note+=' '+recStr.charAt(0).toUpperCase()+recStr.slice(1)+' recommended to reduce injury risk with future falls.';
+    if(interventions){
+      note+=' All interventions are in place and resident is currently receiving therapy services.';
+    }else{
+      note+=' Resident is currently receiving therapy services.';
+      var recStr=formatList(allRecs);
+      note+=' '+recStr.charAt(0).toUpperCase()+recStr.slice(1)+' recommended to reduce injury risk with future falls.';
+    }
   }else{
     note+=pick([' Therapy evaluation recommended for fall risk assessment and safety equipment recommendations.',' Therapy evaluation indicated for fall risk assessment and safety equipment recommendations.',' Therapy evaluation recommended for fall risk and safety equipment assessment.']);
   }
